@@ -31,7 +31,7 @@
 
     "vaadin-combo-box": "vaadin/vaadin-combo-box#^3.0.5",
     "vaadin-date-picker": "vaadin/vaadin-date-picker#^2.0.7",
-    "vaadin-material-theme": "git://github.com/vaadin/vaadin-material-theme#8ef1322",
+    "vaadin-material-theme": "git://github.com/vaadin/vaadin-material-theme#d65df9b",
 
     "google-chart": "GoogleWebComponents/google-chart#^2.0.0",
     "google-signin": "GoogleWebComponents/google-signin#^2.0.0",
