@@ -1,10 +1,10 @@
 {
   "name": "vaadin-material-theme",
-  "homepage": "https://vaadin.com/elements",
+  "homepage": "https://vaadin.com/components",
   "authors": [
     "Vaadin Ltd"
   ],
-  "description": "Material design theme for Vaadin Elements",
+  "description": "Material design theme for Vaadin components",
   "main": "material.html",
   "keywords": [
     "vaadin",
@@ -41,12 +41,12 @@
   "resolutions": {
     "vaadin-control-state-mixin": "^2.0.0"
   },
-  "_release": "d65df9b",
+  "_release": "8ef1322",
   "_resolution": {
     "type": "commit",
-    "commit": "d65df9b"
+    "commit": "8ef1322"
   },
   "_source": "git://github.com/vaadin/vaadin-material-theme.git",
-  "_target": "d65df9b",
+  "_target": "8ef1322",
   "_originalSource": "git://github.com/vaadin/vaadin-material-theme"
 }
