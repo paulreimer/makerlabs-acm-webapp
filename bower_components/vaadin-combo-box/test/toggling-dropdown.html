@@ -67,6 +67,13 @@
         expect(combobox.opened).to.be.true;
       });
 
+      it('should restore attribute focus-ring if it was initially set before opening and combo-box is focused', () => {
+        combobox.setAttribute('focus-ring', '');
+        combobox.opened = true;
+        combobox.opened = false;
+        expect(!combobox.hasAttribute('focused') || combobox.focusElement.hasAttribute('focus-ring')).to.be.true;
+      });
+
       it('should open synchronously by clicking input', () => {
         expect(combobox.opened).to.be.false;
         fireMousedownMouseupClick(combobox.inputElement);
@@ -168,17 +175,17 @@
 
         if (touchDevice) {
           it('should not focus input on dropdown open', () => {
-            expect(combobox.inputElement.focused).to.equal(false);
+            expect(combobox.inputElement.hasAttribute('focused')).to.equal(false);
           });
 
           it('should not refocus the input field when closed from icon', () => {
             clickToggleIcon();
-            expect(combobox.inputElement.focused).to.equal(false);
+            expect(combobox.inputElement.hasAttribute('focused')).to.equal(false);
           });
         } else {
           it('should focus input on dropdown open', done => {
             setTimeout(() => { // IE11
-              expect(combobox.inputElement.focused).to.be.true;
+              expect(combobox.inputElement.hasAttribute('focused')).to.be.true;
               done();
             }, 1);
           });
@@ -186,7 +193,7 @@
           it('should refocus the input field when closed from icon', done => {
             clickToggleIcon();
             setTimeout(() => { // IE11
-              expect(combobox.inputElement.focused).to.be.true;
+              expect(combobox.inputElement.hasAttribute('focused')).to.be.true;
               done();
             }, 1);
           });

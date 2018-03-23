@@ -152,6 +152,14 @@
       expect(newComboBox.value).to.equal('foo');
     });
 
+    it('should be possible to set selectedItem after attaching to the DOM and before setting items', () => {
+      var newComboBox = combobox.cloneNode(true);
+      combobox.parentElement.appendChild(newComboBox);
+      newComboBox.selectedItem = 'foo';
+      newComboBox.items = ['foo', 'bar'];
+      expect(newComboBox.value).to.equal('foo');
+    });
+
     describe('`change` event', () => {
       it('should fire `value-changed` and `selected-item-changed` before `changed`', done => {
         combobox.addEventListener('change', () => {
@@ -219,6 +227,17 @@
         combobox.inputElement.dispatchEvent(new CustomEvent('change'));
 
         expect(changeSpy.callCount).to.equal(0);
+      });
+
+      it('should not set composed flag to true on `change` event', done => {
+        combobox.addEventListener('change', e => {
+          expect(e.composed).to.be.false;
+          done();
+        });
+
+        combobox.open();
+        combobox.value = 'foo';
+        combobox.close();
       });
     });
   });
@@ -324,7 +343,7 @@
 
       expect(combobox.value).to.be.empty;
       expect(combobox.selectedItem).to.be.null;
-      expect(combobox.hasValue).to.be.false;
+      expect(combobox.hasAttribute('has-value')).to.be.false;
     });
 
     it('should select a custom value', () => {
@@ -335,7 +354,7 @@
       expect(combobox.value).to.eql('foobar');
       expect(combobox.selectedItem).to.be.null;
       expect(combobox._inputElementValue).to.eql('foobar');
-      expect(combobox.hasValue).to.be.true;
+      expect(combobox.hasAttribute('has-value')).to.be.true;
     });
 
     it('should clear the custom value on clear', () => {

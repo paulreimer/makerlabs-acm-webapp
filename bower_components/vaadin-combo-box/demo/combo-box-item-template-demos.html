@@ -1,18 +1,17 @@
 <dom-module id="combo-box-item-template-demos">
   <template>
-    <style>
-       :host {
+    <style include="vaadin-component-demo-shared-styles">
+      :host {
         display: block;
       }
-
     </style>
 
 
     <h3>Custom Item Template</h3>
 
-    <vaadin-demo-snippet id='combo-box-item-template-demos-custom-item-template'>
+    <vaadin-demo-snippet id="combo-box-item-template-demos-custom-item-template">
       <template preserve-content>
-        <vaadin-combo-box id="elements-template-box" label="Element" item-label-path="name" item-value-path="symbol">
+        <vaadin-combo-box id="elements-template-box" label="Element" item-label-path="name" item-value-path="symbol" style="width: 240px;">
           <template>
             <b>[[item.name]], <sub>[[item.number]]</sub>[[item.symbol]]</b><br>
             array index: [[index]]
@@ -33,9 +32,9 @@
 
     <h3>Focused and Selected Flags</h3>
 
-    <vaadin-demo-snippet id='combo-box-item-template-demos-focused-and-selected-flags'>
+    <vaadin-demo-snippet id="combo-box-item-template-demos-focused-and-selected-flags">
       <template preserve-content>
-        <vaadin-combo-box id="elements-selected-box" label="Element" value="Carbon">
+        <vaadin-combo-box id="elements-selected-box" label="Element" value="Carbon" style="display: block; max-width: 320px;">
           <template>
             <b>[[item]]</b><br>
             selected: [[selected]], focused: [[focused]]
@@ -54,7 +53,7 @@
 
     <h3>Styling Items with Custom Item Element</h3>
 
-    <vaadin-demo-snippet id='combo-box-item-template-demos-styling-items-with-custom-item-element'>
+    <vaadin-demo-snippet id="combo-box-item-template-demos-styling-items-with-custom-item-element">
       <template preserve-content>
         <!-- Step 1: Define a custom element with your template and item styles -->
 
@@ -101,7 +100,7 @@
 
         <!-- Step 2: Use your custom element in the item template of <vaadin-combo-box> -->
 
-        <vaadin-combo-box id="elements-my-item-box" label="Element" item-label-path="name" item-value-path="symbol">
+        <vaadin-combo-box id="elements-my-item-box" label="Element" item-label-path="name" item-value-path="symbol" style="width: 240px;">
           <template>
             <my-item index="[[index]]" item="[[item]]" selected$="[[selected]]"></my-item>
           </template>
@@ -119,15 +118,16 @@
 
     <h3>Item Template with Paper Item Elements</h3>
 
-    <vaadin-demo-snippet id='combo-box-item-template-demos-item-template-with-paper-item-elements'>
+    <vaadin-demo-snippet id="combo-box-item-template-demos-item-template-with-paper-item-elements">
       <template preserve-content>
-        <vaadin-combo-box id="elements-paper-item" item-value-path="email" item-label-path="email">
+        <vaadin-combo-box id="elements-paper-item" item-value-path="email" item-label-path="email" style="display: block; max-width: 400px;">
           <template>
             <paper-icon-item>
               <img src="[[item.picture.thumbnail]]" style="border-radius: 50%; width: 48px; height: 48px;" slot="item-icon">
               <paper-item-body two-line style="min-height: 0">
                 <div style="text-transform: capitalize">[[item.name.first]] [[item.name.last]]</div>
                 <div secondary>[[item.email]]</div>
+              </paper-item-body>
             </paper-icon-item>
           </template>
         </vaadin-combo-box>
@@ -140,7 +140,6 @@
       </template>
     </vaadin-demo-snippet>
 
-  </div>
 
   </template>
   <script>

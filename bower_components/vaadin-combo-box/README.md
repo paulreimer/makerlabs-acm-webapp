@@ -2,15 +2,15 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/vaadin/vaadin-combo-box)
 ![Polymer 2 supported](https://img.shields.io/badge/Polymer2-supported-blue.svg)
 [![Build Status](https://travis-ci.org/vaadin/vaadin-combo-box.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-combo-box)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin/vaadin-core-elements?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin/web-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # &lt;vaadin-combo-box&gt;
 
-[Live Demo ↗](https://vaadin.com/elements/vaadin-combo-box/html-examples)
+[Live Demo ↗](https://vaadin.com/components/vaadin-combo-box/html-examples)
 |
-[API documentation ↗](https://vaadin.com/elements/vaadin-combo-box/html-api)
+[API documentation ↗](https://vaadin.com/components/vaadin-combo-box/html-api)
 
-[&lt;vaadin-combo-box&gt;](https://vaadin.com/elements/vaadin-combo-box) is a [Polymer](http://polymer-project.org) element combining a dropdown list with an input field for filtering the list of items, part of the [Vaadin Core Elements](https://vaadin.com/elements).
+[&lt;vaadin-combo-box&gt;](https://vaadin.com/components/vaadin-combo-box) is a [Polymer](http://polymer-project.org) element combining a dropdown list with an input field for filtering the list of items, part of the [Vaadin components](https://vaadin.com/components).
 
 <!--
 ```
@@ -18,13 +18,14 @@
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../iron-ajax/iron-ajax.html">
-    <link rel="import" href="../paper-item/all-imports.html">
     <link rel="import" href="vaadin-combo-box.html">
-    <style>
-      vaadin-combo-box {
-        width: 300px;
-      }
-    </style>
+    <custom-style>
+      <style>
+        vaadin-combo-box {
+          width: 300px;
+        }
+      </style>
+    </custom-style>
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
@@ -32,34 +33,36 @@
 -->
 ```html
 <dom-bind>
-  <template is="dom-bind">
-    <iron-ajax url="https://randomuser.me/api?results=100&inc=name,email,picture" last-response="{{response}}" auto></iron-ajax>
-
-    <vaadin-combo-box items="[[response.results]]" item-value-path="email" item-label-path="email">
-      <template>
-        <style>
-          paper-icon-item img {
-            border-radius: 50%;
-            margin-right: 10px;
-          }
-        </style>
-        <paper-icon-item>
-          <img src="[[item.picture.thumbnail]]" slot="item-icon">
-          <paper-item-body two-line>
-            <div>[[item.name.first]] [[item.name.last]]</div>
-            <div secondary>[[item.email]]</div>
-          </paper-item-body>
-        </paper-icon-item>
-      </template>
-    </vaadin-combo-box>
+  <template>
+    <iron-ajax url="https://randomuser.me/api?results=100&inc=name,email" last-response="{{response}}" auto></iron-ajax>
+    <vaadin-combo-box label="User" placeholder="Please select" items="[[response.results]]" item-value-path="email" item-label-path="email"></vaadin-combo-box>
   </template>
 </dom-bind>
-
-
 ```
 
-[<img src="https://raw.githubusercontent.com/vaadin/vaadin-combo-box/master/docs/img/vaadin-combo-box-item-template-material.png" width="311" alt="Screenshot of vaadin-combo-box" />](https://vaadin.com/elements/-/element/vaadin-combo-box)
+[<img src="https://raw.githubusercontent.com/vaadin/vaadin-combo-box/master/screenshot.png" width="208" alt="Screenshot of vaadin-combo-box" />](https://vaadin.com/components/vaadin-combo-box)
 
+## Getting Started
+
+Vaadin components use the Lumo theme by default.
+
+## The file structure for Vaadin components
+
+- `src/vaadin-combo-box.html`
+- `src/vaadin-combo-box-light.html`
+
+  Unstyled components.
+
+- `theme/lumo/vaadin-combo-box.html`
+- `theme/lumo/vaadin-combo-box-light.html`
+
+  Components with Lumo theme.
+
+- `vaadin-combo-box.html`
+- `vaadin-combo-box-light.html`
+
+  Alias for theme/lumo/vaadin-combo-box.html
+  theme/lumo/vaadin-combo-box-light.html
 
 ## Running demos and tests in browser
 
@@ -92,9 +95,11 @@ We are using [ESLint](http://eslint.org/) for linting JavaScript code. You can c
   - Make sure your code is compliant with our code linters: `gulp lint`
   - Check that tests are passing: `polymer test`
   - [Submit a pull request](https://www.digitalocean.com/community/tutorials/how-to-create-a-pull-request-on-github) with detailed title and description
-  - Wait for response from one of Vaadin Elements team members
+  - Wait for response from one of Vaadin components team members
 
 
 ## License
 
 Apache License 2.0
+
+Vaadin collects development time usage statistics to improve this product. For details and to opt-out, see https://github.com/vaadin/vaadin-usage-statistics.

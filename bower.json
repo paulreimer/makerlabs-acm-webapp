@@ -29,8 +29,8 @@
     "paper-radio-button": "PolymerElements/paper-radio-button#^2.1.0",
     "paper-fab": "PolymerElements/paper-fab#^2.1.0",
 
-    "vaadin-combo-box": "vaadin/vaadin-combo-box#^3.0.5",
-    "vaadin-date-picker": "vaadin/vaadin-date-picker#^2.0.7",
+    "vaadin-combo-box": "git://github.com/vaadin/vaadin-combo-box#v4.0.0-beta5",
+    "vaadin-date-picker": "git://github.com/vaadin/vaadin-date-picker#v3.0.0-beta5",
     "vaadin-material-theme": "git://github.com/vaadin/vaadin-material-theme#8ef1322",
 
     "google-chart": "GoogleWebComponents/google-chart#^2.0.0",

@@ -23,14 +23,29 @@
 ```
 -->
 ```html
-<vaadin-button>
-  Vaadin Button
-</vaadin-button>
+<vaadin-button>Button One</vaadin-button>
+<vaadin-button disabled>Button Two</vaadin-button>
 ```
 
-<!-- TODO: uncomment when we have a nice screenshot to show
-[<img src="https://raw.githubusercontent.com/vaadin/vaadin-button/master/screenshot.png" width="200" alt="Screenshot of vaadin-button">](https://vaadin.com/elements/-/element/vaadin-button)
--->
+[<img src="https://raw.githubusercontent.com/vaadin/vaadin-button/master/screenshot.png" alt="Screenshot of vaadin-button, using the default Lumo theme">](https://vaadin.com/elements/-/element/vaadin-button)
+
+## Getting Started
+
+Vaadin Elements use the Lumo theme by default.
+
+## The file structure for Vaadin Elements
+
+- `src/vaadin-button.html`
+
+  Unstyled element.
+
+- `theme/lumo/vaadin-button.html`
+
+  Element with Lumo theme.
+
+- `vaadin-button.html`
+
+  Alias for theme/lumo/vaadin-button.html
 
 ## Running demos and tests in browser
 
@@ -69,3 +84,5 @@ We are using [ESLint](http://eslint.org/) for linting JavaScript code. You can c
 ## License
 
 Apache License 2.0
+
+Vaadin collects development time usage statistics to improve this product. For details and to opt-out, see https://github.com/vaadin/vaadin-usage-statistics.
