@@ -1,5 +1,6 @@
 <link rel="import" href="color.html">
 <link rel="import" href="typography.html">
+<link rel="import" href="../vaadin-text-field/src/vaadin-text-field.html">
 
 <dom-module id="material-text-field" theme-for="vaadin-text-field">
   <template>
@@ -22,8 +23,9 @@
       /* Strange gymnastics to make fields vertically align nicely in most cases
          (no label, with label, without prefix, with prefix, etc.) */
 
-      :host([label]) {
-        vertical-align: 24px;
+      :host([has-label]) {
+        vertical-align: 22px;
+        margin-top: 16px;
       }
 
       [part="label"]:empty {
@@ -35,14 +37,28 @@
         position: absolute;
       }
 
-      :host(:not([label])) {
-        vertical-align: calc(24px - 3px);
+      :host(:not([has-label])) {
+        vertical-align: 22px;
+        /* vertical-align: 21px; */
       }
 
       [part="input-field"] {
         position: relative;
         height: 32px;
+        padding-left: 0;
         padding-bottom: 2px;
+        background-color: transparent;
+        margin: 0;
+      }
+
+      @media (hover: hover) {
+        :host(:hover:not([readonly]):not([invalid]):not([focused])) [part="label"] {
+          color: var(--material-body-text-color);
+        }
+
+        :host(:hover:not([readonly]):not([invalid]):not([focused])) [part="input-field"] {
+          background-color: transparent;
+        }
       }
 
       [part="input-field"]::before,
@@ -67,7 +83,50 @@
         transform: scaleX(0);
       }
 
-      [part="value"] {
+      /* Hover */
+
+      :host(:hover:not([readonly]):not([focused])) [part="label"] {
+        color: var(--material-body-text-color);
+      }
+
+      /* Focus-ring */
+
+      :host([required][focus-ring]) [part="input-field"],
+      :host([focus-ring]) [part="input-field"] {
+        box-shadow: none;
+      }
+
+      :host([required][focus-ring]) [part="input-field"]::after,
+      :host([focus-ring]) [part="input-field"]::after,
+      :host([readonly]) [part="input-field"]::after,
+      :host([required]) [part="input-field"]::after {
+        height: 0;
+      }
+
+      :host([readonly]) [part="input-field"],
+      :host([disabled]) [part="input-field"] {
+        background-color: transparent;
+      }
+
+      :host([disabled]) [part="label"],
+      :host([disabled]) [part="value"],
+      :host([disabled]) [part="input-field"] ::slotted([part="value"]) {
+        color: var(--material-disabled-text-color);
+        -webkit-text-fill-color: var(--material-disabled-text-color);
+      }
+
+      :host([focused]:not([readonly])) [part="input-field"] {
+        background-color: transparent;
+      }
+
+      :host([focused]) [part="input-field"]::before {
+        background-color: var(--material-primary-color);
+        transform: none;
+      }
+
+      [part="value"],
+      /* For vaadin-dropdown-menu-text-field */
+      [part="input-field"] ::slotted([part="value"]) {
         outline: none;
         margin: 0;
         border: 0;
@@ -108,23 +167,23 @@
         opacity: 1;
       }
 
-      :host([label]:not([focused]):not([invalid]):not([theme="always-float-label"])) [part="value"]::-webkit-input-placeholder {
+      :host([has-label]:not([focused]):not([invalid]):not([theme="always-float-label"])) [part="value"]::-webkit-input-placeholder {
         opacity: 0;
         transition-delay: 0;
       }
 
-      :host([label]:not([focused]):not([invalid]):not([theme="always-float-label"])) [part="value"]::-moz-placeholder {
+      :host([has-label]:not([focused]):not([invalid]):not([theme="always-float-label"])) [part="value"]::-moz-placeholder {
         opacity: 0;
         transition-delay: 0;
       }
 
-      :host([label]:not([focused]):not([invalid]):not([theme="always-float-label"])) [part="value"]::placeholder {
+      :host([has-label]:not([focused]):not([invalid]):not([theme="always-float-label"])) [part="value"]::placeholder {
         opacity: 0;
         transition-delay: 0;
       }
 
       /* IE11 doesn’t show the placeholder when the input is focused, so it’s basically useless for this theme */
-      :host([label]) [part="value"]:-ms-input-placeholder {
+      :host([has-label]) [part="value"]:-ms-input-placeholder {
         opacity: 0;
       }
 
@@ -132,13 +191,13 @@
         display: block;
         font-size: 1em;
         line-height: 1;
+        height: 16px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         color: var(--material-secondary-text-color);
         transform-origin: 0 75%;
         transform: scale(0.75);
-        width: 133%;
         transition: transform 0.175s, color 0.175s, width 0.175s;
         transition-timing-function: ease, ease, step-end;
       }
@@ -178,6 +237,10 @@
         color: var(--material-error-text-color);
       }
 
+      :host([invalid]) [part="input-field"] {
+        background-color: transparent;
+      }
+
       :host([invalid]) [part="input-field"]::after {
         background-color: var(--material-error-color);
         transform: none;
@@ -189,6 +252,7 @@
 
       :host([disabled]) [part="input-field"] {
         color: var(--material-disabled-text-color);
+        background-color: transparent;
       }
 
       :host([disabled]) [part="input-field"]::before {
@@ -199,11 +263,10 @@
       }
 
       /* Only target the visible floating label */
-      :host(:not([has-value]):not([focused]):not([invalid]):not([theme~="always-float-label"])) [part="label"] {
+      :host([has-label]:not([has-value]):not([focused]):not([invalid]):not([theme~="always-float-label"])) [part="label"] {
         /* IE11 doesn’t work with calc inside the translate function, so we need to have a fixed pixel value instead of 50% + 16px */
-        transform: scale(1) translateY(24px);
+        transform: scale(1) translateY(25px);
         transition-timing-function: ease, ease, step-start;
-        width: 100%;
         pointer-events: none;
         left: auto;
         transition-delay: 0.1s;
@@ -217,6 +280,11 @@
         animation: reveal 0.2s;
       }
 
+      :host(:not([invalid])) [part="error-message"] {
+        max-height: 0;
+        overflow: hidden;
+      }
+
       @keyframes reveal {
         0% {
           opacity: 0;
@@ -225,6 +293,7 @@
 
       :host([required]) [part="label"]::after {
         content: " *";
+        color: inherit;
       }
 
       /* Dense style */
@@ -253,6 +322,13 @@
       :host([theme~="dense"]) [part="error-message"] {
         margin-top: 4px;
       }
+
+      /* Slotted content */
+
+      [part="input-field"] ::slotted(*) {
+        color: var(--material-secondary-text-color);
+      }
+
     </style>
   </template>
 </dom-module>

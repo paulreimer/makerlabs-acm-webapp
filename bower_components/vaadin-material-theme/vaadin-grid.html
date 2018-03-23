@@ -1,8 +1,9 @@
-<link rel="import" href="vaadin-checkbox.html">
 <link rel="import" href="font-icons.html">
+<link rel="import" href="color.html">
+<link rel="import" href="../vaadin-grid/src/vaadin-grid.html">
+<link rel="import" href="vaadin-checkbox.html">
 
-
-<dom-module id="valo-grid" theme-for="vaadin-grid">
+<dom-module id="material-grid" theme-for="vaadin-grid">
   <template>
     <style>
       :host {
@@ -59,7 +60,7 @@
       }
 
       [part~="row"]:hover [part~="body-cell"] {
-        background: linear-gradient(var(---material-grid-row-hover-background-color, rgba(0,0,0,0.06)), var(---material-grid-row-hover-background-color, rgba(0,0,0,0.06))) var(--material-background-color);
+        background: linear-gradient(var(---material-grid-row-hover-background-color, rgba(0, 0, 0, 0.06)), var(---material-grid-row-hover-background-color, rgba(0, 0, 0, 0.06))) var(--material-background-color);
       }
 
       @media (pointer: coarse) {
@@ -114,7 +115,6 @@
       /* Override cell content styles (experimental) */
 
       [part~="cell"]:not([part~="details-cell"]) ::slotted(vaadin-grid-cell-content) {
-        display: block;
         text-overflow: ellipsis;
         cursor: default;
         white-space: normal;
@@ -131,7 +131,7 @@
   </template>
 </dom-module>
 
-<dom-module id="valo-grid-sorter" theme-for="vaadin-grid-sorter">
+<dom-module id="material-grid-sorter" theme-for="vaadin-grid-sorter">
   <template>
     <style>
       :host {
@@ -204,7 +204,6 @@
   <style>
     vaadin-grid-cell-content vaadin-checkbox:only-child {
       position: fixed;
-      margin-top: -12px;
     }
   </style>
 </custom-style>
